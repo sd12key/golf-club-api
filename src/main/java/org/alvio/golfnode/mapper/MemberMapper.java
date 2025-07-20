@@ -20,12 +20,16 @@ public class MemberMapper {
                 member.getMembershipDurationMonths()
         );
 
-        if (showTournaments && member.getTournaments() != null && !member.getTournaments().isEmpty()) {
-            List<TournamentSummaryDTO> tournamentSummaries = new ArrayList<>();
-            for (Tournament t : member.getTournaments()) {
-                tournamentSummaries.add(TournamentMapper.toSummary(t));
+        if (showTournaments) {
+            if (member.getTournaments() == null || member.getTournaments().isEmpty()) {
+                dto.setTournaments(List.of());
+            } else {
+                List<TournamentSummaryDTO> tournamentSummaries = new ArrayList<>();
+                for (Tournament t : member.getTournaments()) {
+                    tournamentSummaries.add(TournamentMapper.toSummary(t));
+                }
+                dto.setTournaments(tournamentSummaries);
             }
-            dto.setTournaments(tournamentSummaries);
         }
 
         return dto;
