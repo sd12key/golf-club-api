@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Tiger Woods",
+    "address": "123 Fairway Dr, Jupiter, FL 33458",
+    "email": "tiger.woods@example.com",
+    "phoneNumber": "5615550101",
+    "startDate": "2023-01-15",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Phil Mickelson",
+    "address": "456 Green St, Rancho Santa Fe, CA 92067",
+    "email": "phil.mickelson@example.com",
+    "phoneNumber": "8585550202",
+    "startDate": "2023-02-20",
+    "membershipDurationMonths": 6
+  },
+  {
+    "name": "Rory McIlroy",
+    "address": "789 Birdie Ln, Jupiter, FL 33458",
+    "email": "rory.mcilroy@example.com",
+    "phoneNumber": "5615550303",
+    "startDate": "2023-03-10",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Jordan Spieth",
+    "address": "321 Eagle Rd, Dallas, TX 75201",
+    "email": "jordan.spieth@example.com",
+    "phoneNumber": "2145550404",
+    "startDate": "2023-01-05",
+    "membershipDurationMonths": 24
+  },
+  {
+    "name": "Justin Thomas",
+    "address": "654 Par Ave, Louisville, KY 40202",
+    "email": "justin.thomas@example.com",
+    "phoneNumber": "5025550505",
+    "startDate": "2023-04-15",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Brooks Koepka",
+    "address": "987 Chip Ct, West Palm Beach, FL 33411",
+    "email": "brooks.koepka@example.com",
+    "phoneNumber": "5615550606",
+    "startDate": "2023-05-22",
+    "membershipDurationMonths": 6
+  },
+  {
+    "name": "Dustin Johnson",
+    "address": "147 Putt Pl, North Palm Beach, FL 33408",
+    "email": "dustin.johnson@example.com",
+    "phoneNumber": "5615550707",
+    "startDate": "2023-06-30",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Jon Rahm",
+    "address": "258 Drive Way, Scottsdale, AZ 85255",
+    "email": "jon.rahm@example.com",
+    "phoneNumber": "4805550808",
+    "startDate": "2023-07-12",
+    "membershipDurationMonths": 24
+  },
+  {
+    "name": "Collin Morikawa",
+    "address": "369 Iron St, Las Vegas, NV 89135",
+    "email": "collin.morikawa@example.com",
+    "phoneNumber": "7025550909",
+    "startDate": "2023-08-08",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Patrick Cantlay",
+    "address": "741 Wedge Blvd, Long Beach, CA 90802",
+    "email": "patrick.cantlay@example.com",
+    "phoneNumber": "5625551010",
+    "startDate": "2023-09-18",
+    "membershipDurationMonths": 6
+  },
+  {
+    "name": "Xander Schauffele",
+    "address": "852 Sand Trap Rd, San Diego, CA 92130",
+    "email": "xander.schauffele@example.com",
+    "phoneNumber": "6195551111",
+    "startDate": "2023-10-05",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Bryson DeChambeau",
+    "address": "963 Long Dr, Dallas, TX 75201",
+    "email": "bryson.dechambeau@example.com",
+    "phoneNumber": "2145551212",
+    "startDate": "2023-11-11",
+    "membershipDurationMonths": 24
+  },
+  {
+    "name": "Viktor Hovland",
+    "address": "159 Short Ln, Stillwater, OK 74074",
+    "email": "viktor.hovland@example.com",
+    "phoneNumber": "4055551313",
+    "startDate": "2023-12-25",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Scottie Scheffler",
+    "address": "357 Masters Ave, Austin, TX 78701",
+    "email": "scottie.scheffler@example.com",
+    "phoneNumber": "5125551414",
+    "startDate": "2024-01-01",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Hideki Matsuyama",
+    "address": "753 Japan Blvd, Sendai, Japan 980-0803",
+    "email": "hideki.matsuyama@example.com",
+    "phoneNumber": "2225551515",
+    "startDate": "2024-02-14",
+    "membershipDurationMonths": 6
+  },
+  {
+    "name": "Cameron Smith",
+    "address": "951 Australia Way, Brisbane, QLD 4000",
+    "email": "cameron.smith@example.com",
+    "phoneNumber": "7335551616",
+    "startDate": "2024-03-03",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Sungjae Im",
+    "address": "357 Korea St, Seoul, South Korea",
+    "email": "sungjae.im@example.com",
+    "phoneNumber": "8225551717",
+    "startDate": "2024-04-22",
+    "membershipDurationMonths": 24
+  },
+  {
+    "name": "Tommy Fleetwood",
+    "address": "852 England Rd, Southport, UK PR8 2AB",
+    "email": "tommy.fleetwood@example.com",
+    "phoneNumber": "4415551818",
+    "startDate": "2024-05-15",
+    "membershipDurationMonths": 12
+  },
+  {
+    "name": "Shane Lowry",
+    "address": "456 Ireland Ave, Dublin, Ireland",
+    "email": "shane.lowry@example.com",
+    "phoneNumber": "3535551919",
+    "startDate": "2024-06-10",
+    "membershipDurationMonths": 6
+  },
+  {
+    "name": "Adam Scott",
+    "address": "789 Aussie Ln, Gold Coast, QLD 4217",
+    "email": "adam.scott@example.com",
+    "phoneNumber": "7555552020",
+    "startDate": "2024-07-04",
+    "membershipDurationMonths": 12
+  }
+]

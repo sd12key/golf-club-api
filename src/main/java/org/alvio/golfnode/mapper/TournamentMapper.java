@@ -19,12 +19,16 @@ public class TournamentMapper {
                 tournament.getCashPrize()
         );
 
-        if (showMembers && tournament.getMembers() != null && !tournament.getMembers().isEmpty()) {
-            List<MemberSummaryDTO> memberSummaries = new ArrayList<>();
-            for (Member m : tournament.getMembers()) {
-                memberSummaries.add(MemberMapper.toSummary(m));
+        if (showMembers) {
+            if (tournament.getMembers() == null || tournament.getMembers().isEmpty()) {
+                dto.setMembers(List.of());
+            } else {
+                List<MemberSummaryDTO> memberSummaries = new ArrayList<>();
+                for (Member m : tournament.getMembers()) {
+                    memberSummaries.add(MemberMapper.toSummary(m));
+                }
+                dto.setMembers(memberSummaries);
             }
-            dto.setMembers(memberSummaries);
         }
 
         return dto;

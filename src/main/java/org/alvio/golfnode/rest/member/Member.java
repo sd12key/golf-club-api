@@ -27,19 +27,19 @@ public class Member {
     @NotBlank(message = "Email address is required.")
     @Email(message = "Invalid email address.")
     @Size(max = 100)
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
     private String email;
 
     @NotBlank(message = "Phone number is required.")
     @Pattern(regexp = "^\\d{10}$", message = "Phone number must be 10 digits.")
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 10, unique = true)
     private String phoneNumber;
 
     @NotNull(message = "Start date is required.")
     @Column(nullable = false)
     private LocalDate startDate;
 
-    @Min(value = 1, message = "Membership duration must be at least 1 month.")
+    @Min(value = 1, message = "Membership duration is required, must be at least 1 month.")
     @Column(nullable = false)
     private int membershipDurationMonths;
 

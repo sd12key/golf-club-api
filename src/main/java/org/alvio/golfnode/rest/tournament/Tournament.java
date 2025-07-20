@@ -45,7 +45,7 @@ public class Tournament {
 
     @ManyToMany
     @JoinTable(
-        name = "member_tournament",
+        name = "tournament_member",
         joinColumns = @JoinColumn(name = "tournament_id"),
         inverseJoinColumns = @JoinColumn(name = "member_id"),
         uniqueConstraints = @UniqueConstraint(columnNames = {"tournament_id", "member_id"})
