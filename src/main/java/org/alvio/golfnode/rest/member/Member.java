@@ -73,6 +73,29 @@ public class Member {
         this.tournaments = (tournaments != null) ? tournaments : new ArrayList<>();
     }
 
+    public void addTournament(Tournament tournament) {
+        if (!this.tournaments.contains(tournament)) {
+            this.tournaments.add(tournament);
+        }
+        if (!tournament.getMembers().contains(this)) {
+            tournament.getMembers().add(this);
+        }
+    }
+
+    public void removeTournament(Tournament tournament) {
+        this.tournaments.remove(tournament);
+        tournament.getMembers().remove(this);
+    }
+
+    public boolean hasTournament(Tournament tournament) {
+        return this.tournaments.contains(tournament);
+    }
+
+    public boolean doesNotHaveTournament(Tournament tournament) {
+        return !this.tournaments.contains(tournament);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
