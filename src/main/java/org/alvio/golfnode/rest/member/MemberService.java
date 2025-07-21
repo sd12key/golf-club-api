@@ -44,8 +44,8 @@ public class MemberService {
         }
         if (billingDuration != null) {
             return showTournaments
-                    ? memberRepository.findAllByBillingDurationIgnoreCase(billingDuration)
-                    : memberRepository.findByBillingDurationIgnoreCase(billingDuration);
+                    ? memberRepository.findAllByBillingDurationContainingIgnoreCase(billingDuration)
+                    : memberRepository.findByBillingDurationContainingIgnoreCase(billingDuration);
         }
         if (phoneNumber != null) {
             return showTournaments

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,16 +112,20 @@ public class TournamentController {
         }
 
         List<Map<String, Object>> resultList = new ArrayList<>();
+        int successCount = 0;
+        int failureCount = 0;
 
         for (TournamentRegistrationRequestDTO req : requests) {
             try {
                 TournamentMemberPair result = tournamentService.addMemberToTournament(req.getTournamentId(), req.getMemberId());
+                successCount++;
                 resultList.add(Map.of(
                         "message", "Member added to tournament.",
                         "tournament", TournamentMapper.toSummary(result.tournament()),
                         "member", MemberMapper.toSummary(result.member())
                 ));
             } catch (Exception ex) {
+                failureCount++;
                 resultList.add(Map.of(
                         "error", ex.getClass().getSimpleName() + ": " + ex.getMessage(),
                         "tournamentId", req.getTournamentId(),
@@ -129,9 +134,23 @@ public class TournamentController {
             }
         }
 
-        return ResponseEntity.ok(resultList);
-    }
+        HttpStatus status;
+        if (successCount == requests.size()) {
+            status = HttpStatus.CREATED; // all success
+        } else if (failureCount == requests.size()) {
+            status = HttpStatus.BAD_REQUEST; // all failed
+        } else {
+            status = HttpStatus.MULTI_STATUS; // partial success
+        }
 
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("total", requests.size());
+        response.put("success", successCount);
+        response.put("failed", failureCount);
+        response.put("results", resultList);
+
+        return ResponseEntity.status(status).body(response);
+    }
 
     @DeleteMapping("/tournament/member")
     public ResponseEntity<?> removeMemberFromTournament(@Valid @RequestBody TournamentRegistrationRequestDTO request) {
