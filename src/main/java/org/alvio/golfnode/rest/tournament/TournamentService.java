@@ -1,10 +1,16 @@
 package org.alvio.golfnode.rest.tournament;
 
+import org.alvio.golfnode.dto.TournamentRegistrationRequestDTO;
+import org.alvio.golfnode.exception.ConflictException;
+import org.alvio.golfnode.rest.member.Member;
+import org.alvio.golfnode.rest.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -12,6 +18,9 @@ public class TournamentService {
 
     @Autowired
     private TournamentRepository tournamentRepository;
+
+    @Autowired
+    private MemberService memberService;
 
     public List<Tournament> getAllTournaments(boolean showMembers) {
         return showMembers ? tournamentRepository.findAllBy() : tournamentRepository.findAll();
@@ -94,4 +103,32 @@ public class TournamentService {
 
         tournamentRepository.deleteById(id);
     }
+
+    public TournamentMemberPair addMemberToTournament(Long tournamentId, Long memberId) {
+        Tournament tournament = getTournamentById(tournamentId, true); //eager load members
+        Member member = memberService.getMemberById(memberId, false);
+
+        if (tournament.doesNotHaveMember(member)) {
+            tournament.addMember(member);
+            tournamentRepository.save(tournament);
+        } else {
+            throw new ConflictException("Member is already registered for this tournament.");
+        }
+
+        return new TournamentMemberPair(tournament, member);
+    }
+
+    public void removeMemberFromTournament(Long tournamentId, Long memberId) {
+        Tournament tournament = getTournamentById(tournamentId, true); //eager load members
+        Member member = memberService.getMemberById(memberId, false);
+
+        if (tournament.hasMember(member)) {
+            tournament.removeMember(member);
+            tournamentRepository.save(tournament);
+        } else {
+            throw new NoSuchElementException("Member not found in this tournament.");
+        }
+
+    }
+
 }
