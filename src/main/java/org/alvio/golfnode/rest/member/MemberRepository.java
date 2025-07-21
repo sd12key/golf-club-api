@@ -57,10 +57,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @EntityGraph(attributePaths = "tournaments")
     List<Member> findAllByStartDateGreaterThanEqual(LocalDate startDate);
 
-    // tournament start date search, always eager loading
-    @EntityGraph(attributePaths = "tournaments")
-    @Query("SELECT DISTINCT m FROM Member m JOIN m.tournaments t WHERE t.startDate >= :startDate")
+    // tournament start date search, always eager loading because of FETCH
+    @Query("SELECT DISTINCT m FROM Member m JOIN FETCH m.tournaments t WHERE t.startDate >= :startDate")
     List<Member> findByTournamentStartDate(@Param("startDate") LocalDate startDate);
-
 
 }

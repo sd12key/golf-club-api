@@ -38,7 +38,7 @@ public class Member {
 
     @NotNull(message = "Start date is required.")
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private LocalDate startDate;
 
     @NotBlank(message = "Billing duration is required.")
@@ -77,20 +77,6 @@ public class Member {
     public List<Tournament> getTournaments() { return tournaments; }
     public void setTournaments(List<Tournament> tournaments) {
         this.tournaments = (tournaments != null) ? tournaments : new ArrayList<>();
-    }
-
-    public void addTournament(Tournament tournament) {
-        if (!this.tournaments.contains(tournament)) {
-            this.tournaments.add(tournament);
-        }
-        if (!tournament.getMembers().contains(this)) {
-            tournament.getMembers().add(this);
-        }
-    }
-
-    public void removeTournament(Tournament tournament) {
-        this.tournaments.remove(tournament);
-        tournament.getMembers().remove(this);
     }
 
     public boolean hasTournament(Tournament tournament) {

@@ -74,19 +74,14 @@ public class Tournament {
         this.members = (members != null) ? members : new ArrayList<>();
     }
 
-    // member management methods, not sure yet if I will actually use these methods
     public void addMember(Member member) {
         if (!this.members.contains(member)) {
             this.members.add(member);
-        }
-        if (!member.getTournaments().contains(this)) {
-            member.getTournaments().add(this);
         }
     }
 
     public void removeMember(Member member) {
         this.members.remove(member);
-        member.getTournaments().remove(this);
     }
 
     public boolean hasMember(Member member) {

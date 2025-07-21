@@ -2,6 +2,8 @@ package org.alvio.golfnode.rest.tournament;
 
 import jakarta.validation.Valid;
 import org.alvio.golfnode.dto.TournamentDTO;
+import org.alvio.golfnode.dto.TournamentRegistrationRequestDTO;
+import org.alvio.golfnode.mapper.MemberMapper;
 import org.alvio.golfnode.mapper.TournamentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -90,4 +93,57 @@ public class TournamentController {
         tournamentService.deleteTournament(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/tournament/member")
+    public ResponseEntity<?> addMemberToTournament(@Valid @RequestBody TournamentRegistrationRequestDTO request) {
+        TournamentMemberPair result = tournamentService.addMemberToTournament(request.getTournamentId(), request.getMemberId());
+        return ResponseEntity.ok(Map.of(
+                "message", "Member added to tournament.",
+                "tournament", TournamentMapper.toSummary(result.tournament()),
+                "member", MemberMapper.toSummary(result.member())
+        ));
+    }
+
+    @PostMapping("/tournament/members")
+    public ResponseEntity<?> addMembersToTournament(@Valid @RequestBody List<TournamentRegistrationRequestDTO> requests) {
+        if (requests == null || requests.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Request must include at least one booking."));
+        }
+
+        List<Map<String, Object>> resultList = new ArrayList<>();
+
+        for (TournamentRegistrationRequestDTO req : requests) {
+            try {
+                TournamentMemberPair result = tournamentService.addMemberToTournament(req.getTournamentId(), req.getMemberId());
+                resultList.add(Map.of(
+                        "message", "Member added to tournament.",
+                        "tournament", TournamentMapper.toSummary(result.tournament()),
+                        "member", MemberMapper.toSummary(result.member())
+                ));
+            } catch (Exception ex) {
+                resultList.add(Map.of(
+                        "error", ex.getClass().getSimpleName() + ": " + ex.getMessage(),
+                        "tournamentId", req.getTournamentId(),
+                        "memberId", req.getMemberId()
+                ));
+            }
+        }
+
+        return ResponseEntity.ok(resultList);
+    }
+
+
+    @DeleteMapping("/tournament/member")
+    public ResponseEntity<?> removeMemberFromTournament(@Valid @RequestBody TournamentRegistrationRequestDTO request) {
+        tournamentService.removeMemberFromTournament(request.getTournamentId(), request.getMemberId());
+        return ResponseEntity.ok(Map.of(
+                "message", "Member removed from tournament.",
+                "tournamentId", request.getTournamentId(),
+                "memberId", request.getMemberId()
+        ));
+    }
+
+
+
+
 }
