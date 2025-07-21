@@ -1,0 +1,37 @@
+[
+  {
+    "startDate": "2024-06-15",
+    "endDate": "2024-06-16",
+    "location": "Pebble Beach Golf Links",
+    "entryFee": 500.00,
+    "cashPrize": 1000000.00
+  },
+  {
+    "startDate": "2024-07-20",
+    "endDate": "2024-07-22",
+    "location": "Augusta National Golf Club",
+    "entryFee": 750.00,
+    "cashPrize": 1500000.00
+  },
+  {
+    "startDate": "2024-08-10",
+    "endDate": "2024-08-12",
+    "location": "St. Andrews Links",
+    "entryFee": 600.00,
+    "cashPrize": 1200000.00
+  },
+  {
+    "startDate": "2024-09-05",
+    "endDate": "2024-09-08",
+    "location": "TPC Sawgrass",
+    "entryFee": 400.00,
+    "cashPrize": 800000.00
+  },
+  {
+    "startDate": "2024-10-15",
+    "endDate": "2024-10-17",
+    "location": "Bethpage Black Course",
+    "entryFee": 450.00,
+    "cashPrize": 900000.00
+  }
+]
