@@ -30,11 +30,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findAllByNameContainingIgnoreCase(String name);
 
     // lazy loading
-    List<Member> findByMembershipDurationMonths(int membershipDurationMonths);
+    List<Member> findByBillingDurationIgnoreCase(String billingDuration);
 
     // for eager loading when showTournaments=true
     @EntityGraph(attributePaths = "tournaments")
-    List<Member> findAllByMembershipDurationMonths(int membershipDurationMonths);
+    List<Member> findAllByBillingDurationIgnoreCase(String billingDuration);
 
     // lazy loading
     List<Member> findByPhoneNumberContaining(String phoneNumber);

@@ -17,7 +17,7 @@ public class MemberMapper {
                 member.getEmail(),
                 member.getPhoneNumber(),
                 member.getStartDate(),
-                member.getMembershipDurationMonths()
+                member.getBillingDuration()
         );
 
         if (showTournaments) {
@@ -47,7 +47,7 @@ public class MemberMapper {
                 member.getEmail(),
                 member.getPhoneNumber(),
                 member.getStartDate(),
-                member.getMembershipDurationMonths()
+                member.getBillingDuration()
         );
     }
 }

@@ -1,5 +1,6 @@
 package org.alvio.golfnode.rest.member;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.alvio.golfnode.rest.tournament.Tournament;
@@ -37,11 +38,16 @@ public class Member {
 
     @NotNull(message = "Start date is required.")
     @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
     private LocalDate startDate;
 
-    @Min(value = 1, message = "Membership duration is required, must be at least 1 month.")
-    @Column(nullable = false)
-    private int membershipDurationMonths;
+    @NotBlank(message = "Billing duration is required.")
+    @Pattern(
+            regexp = "^(1mo|3mo|6mo|1yr|2yr|5yr|life)$",
+            message = "Invalid billing duration. Allowed: 1mo, 3mo, 6mo, 1yr, 2yr, 5yr, life"
+    )
+    @Column(nullable = false, length=4)
+    private String billingDuration;
 
     @ManyToMany(mappedBy = "members")
     private List<Tournament> tournaments = new ArrayList<>();
@@ -63,9 +69,9 @@ public class Member {
     public LocalDate getStartDate() { return startDate; }
     public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public int getMembershipDurationMonths() { return membershipDurationMonths; }
-    public void setMembershipDurationMonths(int membershipDurationMonths) {
-        this.membershipDurationMonths = membershipDurationMonths;
+    public String getBillingDuration() { return billingDuration; }
+    public void setBillingDuration(String billingDuration) {
+        this.billingDuration = billingDuration.trim().toLowerCase();
     }
 
     public List<Tournament> getTournaments() { return tournaments; }

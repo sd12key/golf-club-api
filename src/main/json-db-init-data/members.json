@@ -5,7 +5,7 @@
     "email": "tiger.woods@example.com",
     "phoneNumber": "5615550101",
     "startDate": "2023-01-15",
-    "membershipDurationMonths": 12
+    "billingDuration": "5yr"
   },
   {
     "name": "Phil Mickelson",
@@ -13,7 +13,7 @@
     "email": "phil.mickelson@example.com",
     "phoneNumber": "8585550202",
     "startDate": "2023-02-20",
-    "membershipDurationMonths": 6
+    "billingDuration": "6mo"
   },
   {
     "name": "Rory McIlroy",
@@ -21,7 +21,7 @@
     "email": "rory.mcilroy@example.com",
     "phoneNumber": "5615550303",
     "startDate": "2023-03-10",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   },
   {
     "name": "Jordan Spieth",
@@ -29,7 +29,7 @@
     "email": "jordan.spieth@example.com",
     "phoneNumber": "2145550404",
     "startDate": "2023-01-05",
-    "membershipDurationMonths": 24
+    "billingDuration": "2yr"
   },
   {
     "name": "Justin Thomas",
@@ -37,7 +37,7 @@
     "email": "justin.thomas@example.com",
     "phoneNumber": "5025550505",
     "startDate": "2023-04-15",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   },
   {
     "name": "Brooks Koepka",
@@ -45,7 +45,7 @@
     "email": "brooks.koepka@example.com",
     "phoneNumber": "5615550606",
     "startDate": "2023-05-22",
-    "membershipDurationMonths": 6
+    "billingDuration": "6mo"
   },
   {
     "name": "Dustin Johnson",
@@ -53,7 +53,7 @@
     "email": "dustin.johnson@example.com",
     "phoneNumber": "5615550707",
     "startDate": "2023-06-30",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   },
   {
     "name": "Jon Rahm",
@@ -61,7 +61,7 @@
     "email": "jon.rahm@example.com",
     "phoneNumber": "4805550808",
     "startDate": "2023-07-12",
-    "membershipDurationMonths": 24
+    "billingDuration": "2yr"
   },
   {
     "name": "Collin Morikawa",
@@ -69,7 +69,7 @@
     "email": "collin.morikawa@example.com",
     "phoneNumber": "7025550909",
     "startDate": "2023-08-08",
-    "membershipDurationMonths": 12
+    "billingDuration": "5yr"
   },
   {
     "name": "Patrick Cantlay",
@@ -77,7 +77,7 @@
     "email": "patrick.cantlay@example.com",
     "phoneNumber": "5625551010",
     "startDate": "2023-09-18",
-    "membershipDurationMonths": 6
+    "billingDuration": "6mo"
   },
   {
     "name": "Xander Schauffele",
@@ -85,7 +85,7 @@
     "email": "xander.schauffele@example.com",
     "phoneNumber": "6195551111",
     "startDate": "2023-10-05",
-    "membershipDurationMonths": 12
+    "billingDuration": "life"
   },
   {
     "name": "Bryson DeChambeau",
@@ -93,7 +93,7 @@
     "email": "bryson.dechambeau@example.com",
     "phoneNumber": "2145551212",
     "startDate": "2023-11-11",
-    "membershipDurationMonths": 24
+    "billingDuration": "2yr"
   },
   {
     "name": "Viktor Hovland",
@@ -101,7 +101,7 @@
     "email": "viktor.hovland@example.com",
     "phoneNumber": "4055551313",
     "startDate": "2023-12-25",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   },
   {
     "name": "Scottie Scheffler",
@@ -109,7 +109,7 @@
     "email": "scottie.scheffler@example.com",
     "phoneNumber": "5125551414",
     "startDate": "2024-01-01",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   },
   {
     "name": "Hideki Matsuyama",
@@ -117,7 +117,7 @@
     "email": "hideki.matsuyama@example.com",
     "phoneNumber": "2225551515",
     "startDate": "2024-02-14",
-    "membershipDurationMonths": 6
+    "billingDuration": "6mo"
   },
   {
     "name": "Cameron Smith",
@@ -125,7 +125,7 @@
     "email": "cameron.smith@example.com",
     "phoneNumber": "7335551616",
     "startDate": "2024-03-03",
-    "membershipDurationMonths": 12
+    "billingDuration": "life"
   },
   {
     "name": "Sungjae Im",
@@ -133,7 +133,7 @@
     "email": "sungjae.im@example.com",
     "phoneNumber": "8225551717",
     "startDate": "2024-04-22",
-    "membershipDurationMonths": 24
+    "billingDuration": "2yr"
   },
   {
     "name": "Tommy Fleetwood",
@@ -141,7 +141,7 @@
     "email": "tommy.fleetwood@example.com",
     "phoneNumber": "4415551818",
     "startDate": "2024-05-15",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   },
   {
     "name": "Shane Lowry",
@@ -149,7 +149,7 @@
     "email": "shane.lowry@example.com",
     "phoneNumber": "3535551919",
     "startDate": "2024-06-10",
-    "membershipDurationMonths": 6
+    "billingDuration": "6mo"
   },
   {
     "name": "Adam Scott",
@@ -157,6 +157,6 @@
     "email": "adam.scott@example.com",
     "phoneNumber": "7555552020",
     "startDate": "2024-07-04",
-    "membershipDurationMonths": 12
+    "billingDuration": "1yr"
   }
 ]
