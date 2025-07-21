@@ -1,12 +1,10 @@
 package org.alvio.golfnode.exception;
 
 import jakarta.validation.ConstraintViolationException;
-import org.springframework.context.MessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,9 +13,7 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @RestControllerAdvice
 public class ValidationErrorHandler {
@@ -40,19 +36,16 @@ public class ValidationErrorHandler {
     // Handles @RequestBody validation errors (@Valid) in bulk payload
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<Map<String, String>> handleHandlerMethodValidation(HandlerMethodValidationException ex) {
-        MessageSourceResolvable firstError = ex.getAllErrors().get(0);
-        String fieldName = "error";
-        String errorMessage = firstError.getDefaultMessage();
-        if (firstError instanceof FieldError fieldError) {
-            fieldName = fieldError.getField();
-        }
-        else if (firstError instanceof ObjectError objectError) {
-            if (!objectError.getCodes()[0].contains(".")) {
-                fieldName = objectError.getCodes()[0];
-            }
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Map.of(fieldName, errorMessage));
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getAllErrors().forEach(error -> {
+            String fieldName = error instanceof FieldError ?
+                    ((FieldError) error).getField() :
+                    "error";
+            errors.putIfAbsent(fieldName, error.getDefaultMessage());
+        });
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
     // Handles @RequestParam validation errors (@Validated)
