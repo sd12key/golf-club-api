@@ -55,6 +55,7 @@ public class ValidationErrorHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
+    // handles errors occurring with invalid JSON or date formats
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         if (ex.getCause() != null && ex.getCause().getCause() instanceof DateTimeParseException) {
@@ -69,7 +70,7 @@ public class ValidationErrorHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-
+    // handles type mismatch errors for @RequestParam
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Map<String, String>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         Map<String, String> error = new HashMap<>();
