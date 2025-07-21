@@ -1,17 +1,17 @@
 package org.alvio.golfnode.exception;
 
 import jakarta.validation.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -23,14 +23,14 @@ public class ValidationErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationErrors(
             MethodArgumentNotValidException ex) {
-
+        
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-
+        
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
@@ -48,28 +48,27 @@ public class ValidationErrorHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
-    @ExceptionHandler(HandlerMethodValidationException.class)
-    public ResponseEntity<Map<String, String>> handleValidationFailure(HandlerMethodValidationException ex) {
-        return ResponseEntity.badRequest().body(Map.of(
-                "error", "Validation failure",
-                "details", ex.getMessage()
-        ));
-    }
-
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String, Object>> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of(
-                "error", "Data integrity violation",
-                "details", ex.getMessage()
-        ));
-    }
-
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Map<String, String>> handleMissingParam(MissingServletRequestParameterException ex) {
         Map<String, String> error = new HashMap<>();
         error.put(ex.getParameterName(), "Required parameter '" + ex.getParameterName() + "' is missing.");
         return ResponseEntity.badRequest().body(error);
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        if (ex.getCause() != null && ex.getCause().getCause() instanceof DateTimeParseException) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Invalid date format (use yyyy-mm-dd).");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+        // default handling for other HttpMessageNotReadable cases
+        Map<String, String> response = new HashMap<>();
+        response.put("error", "Invalid request format");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Map<String, String>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {

@@ -13,18 +13,18 @@ public class MemberDTO {
     private String email;
     private String phoneNumber;
     private LocalDate startDate;
-    private int membershipDurationMonths;
+    private String billingDuration;
     private List<TournamentSummaryDTO> tournaments;
 
     public MemberDTO(Long id, String name, String address, String email,
-                     String phoneNumber, LocalDate startDate, int membershipDurationMonths) {
+                     String phoneNumber, LocalDate startDate, String billingDuration) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.startDate = startDate;
-        this.membershipDurationMonths = membershipDurationMonths;
+        this.billingDuration = billingDuration;
     }
 
     public Long getId() { return id; }
@@ -33,7 +33,7 @@ public class MemberDTO {
     public String getEmail() { return email; }
     public String getPhoneNumber() { return phoneNumber; }
     public LocalDate getStartDate() { return startDate; }
-    public int getMembershipDurationMonths() { return membershipDurationMonths; }
+    public String getBillingDuration() { return billingDuration; }
 
     public List<TournamentSummaryDTO> getTournaments() { return tournaments; }
     public void setTournaments(List<TournamentSummaryDTO> tournaments) { this.tournaments = tournaments; }

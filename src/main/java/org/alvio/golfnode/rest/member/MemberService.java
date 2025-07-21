@@ -1,5 +1,6 @@
 package org.alvio.golfnode.rest.member;
 
+import org.alvio.golfnode.exception.ConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class MemberService {
 
     public List<Member> searchMembers(
             String name,
-            Integer membershipDuration,
+            String billingDuration,
             String phoneNumber,
             String email,
             LocalDate membershipStartDate,
@@ -41,10 +42,10 @@ public class MemberService {
                     ? memberRepository.findAllByNameContainingIgnoreCase(name)
                     : memberRepository.findByNameContainingIgnoreCase(name);
         }
-        if (membershipDuration != null) {
+        if (billingDuration != null) {
             return showTournaments
-                    ? memberRepository.findAllByMembershipDurationMonths(membershipDuration)
-                    : memberRepository.findByMembershipDurationMonths(membershipDuration);
+                    ? memberRepository.findAllByBillingDurationIgnoreCase(billingDuration)
+                    : memberRepository.findByBillingDurationIgnoreCase(billingDuration);
         }
         if (phoneNumber != null) {
             return showTournaments
@@ -70,11 +71,11 @@ public class MemberService {
         }
 
         if (memberRepository.existsByEmailIgnoreCase(member.getEmail())) {
-            throw new IllegalArgumentException("A member with the same email already exists.");
+            throw new ConflictException("A member with the same email already exists.");
         }
 
         if (memberRepository.existsByPhoneNumber(member.getPhoneNumber())) {
-            throw new IllegalArgumentException("A member with the same phone number already exists.");
+            throw new ConflictException("A member with the same phone number already exists.");
         }
 
         return memberRepository.save(member);
@@ -86,10 +87,10 @@ public class MemberService {
                 throw new IllegalArgumentException("ID must not be provided when creating a new record.");
             }
             if (memberRepository.existsByEmailIgnoreCase(m.getEmail())) {
-                throw new IllegalArgumentException("Duplicate email: " + m.getEmail());
+                throw new ConflictException("Duplicate email: " + m.getEmail());
             }
             if (memberRepository.existsByPhoneNumber(m.getPhoneNumber())) {
-                throw new IllegalArgumentException("Duplicate phone number: " + m.getPhoneNumber());
+                throw new ConflictException("Duplicate phone number: " + m.getPhoneNumber());
             }
         }
         return memberRepository.saveAll(members);
@@ -105,12 +106,12 @@ public class MemberService {
 
         if (!existing.getEmail().equalsIgnoreCase(updated.getEmail()) &&
                 memberRepository.existsByEmailIgnoreCase(updated.getEmail())) {
-            throw new IllegalArgumentException("A member with the same email already exists.");
+            throw new ConflictException("A member with the same email already exists.");
         }
 
         if (!existing.getPhoneNumber().equals(updated.getPhoneNumber()) &&
                 memberRepository.existsByPhoneNumber(updated.getPhoneNumber())) {
-            throw new IllegalArgumentException("A member with the same phone number already exists.");
+            throw new ConflictException("A member with the same phone number already exists.");
         }
 
         existing.setName(updated.getName());
@@ -118,7 +119,7 @@ public class MemberService {
         existing.setEmail(updated.getEmail());
         existing.setPhoneNumber(updated.getPhoneNumber());
         existing.setStartDate(updated.getStartDate());
-        existing.setMembershipDurationMonths(updated.getMembershipDurationMonths());
+        existing.setBillingDuration(updated.getBillingDuration());
 
         return memberRepository.save(existing);
     }
@@ -128,7 +129,7 @@ public class MemberService {
                 .orElseThrow(() -> new NoSuchElementException("Member with ID " + id + " not found."));
 
         if (!member.getTournaments().isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete member who is registered for tournaments.");
+            throw new ConflictException("Cannot delete member who is registered for tournaments.");
         }
 
         memberRepository.deleteById(id);
